@@ -49,7 +49,9 @@ class UserPostsRepository {
 
   getUserPosts(callback) {
     const db = mongoService.getDbInstance();
-    userPosts.find({}).populate('userInfo', '-password').sort({ 'created_on': -1 }).exec((err, result) => {
+    userPosts.find({}).populate('userInfo', '-password')
+    .populate({ path: 'comments.userInfo', select: '-password'}).
+    sort({ 'created_on': -1 }).exec((err, result) => {
       if (err) {
         callback(err, null);  
         return;

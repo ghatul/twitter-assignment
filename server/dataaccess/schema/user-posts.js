@@ -20,7 +20,7 @@ const userComments = new Schema({
         type: Date,
         default: Date.now
     },
-    userInfo: [{ type: Schema.Types.ObjectId, ref: 'MyUser' }]
+    userInfo: { type: Schema.Types.ObjectId, ref: 'MyUser' }
 })
 
 const userPosts = new Schema({
