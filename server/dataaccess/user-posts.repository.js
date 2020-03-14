@@ -26,7 +26,10 @@ class UserPostsRepository {
   updatePost(data, psotId, callback) {
     const db = mongoService.getDbInstance();
     const userCommnetsModel = new userCommnets(data);
-    userPosts.findByIdAndUpdate({_id: mongoose.Types.ObjectId(psotId)}, {$push: {comments: userCommnetsModel}}, {new: true}).populate('userInfo', '-password').exec((err, result) => {
+    userPosts.findByIdAndUpdate({_id: mongoose.Types.ObjectId(psotId)}, {$push: {comments: userCommnetsModel}}, {new: true})
+    .populate('userInfo', '-password')
+    .populate({ path: 'comments.userInfo', select: '-password'})
+    .exec((err, result) => {
       if (err) {
         callback(err, null);
         return;
