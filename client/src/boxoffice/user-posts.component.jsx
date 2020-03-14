@@ -1,7 +1,7 @@
 import React from 'react';
+import io from 'socket.io-client';
 import { connect } from 'react-redux';
 import UserPostsAction from './../actions/user-post';
-import io from 'socket.io-client';
 const _ = require('lodash');
 
 
@@ -19,29 +19,20 @@ class UserPostsComponent extends React.Component {
 
     componentDidMount() {
         this.props.getUserPosts();
+        //const socket = SocketConnection.getIO();
+        const socket = io.connect('ws://127.0.0.1:4001');
 
-        var socket = io.connect('ws://127.0.0.1:4001');
-        socket.on('some event', (data) => {
-           // alert('data');
-        })
-
-        socket.on('connect', function (socket) {
-           // alert('Connected!');
+        socket.on('connect', (socket) => {
+            //alert('Connected!');
         });
 
-        socket.on('chat message', function (socket) {
-            alert('chat message!');
+        socket.on('user post', (res) => {
+            this.props.insertPost(res)
         });
 
-        socket.on('messages', function (socket) {
-            alert('socket');
+        socket.on('update post', (res) => {
+            this.props.addComment(res)
         });
-
-        socket.on('connect_error', (err) => {
-            console.log('socket connected error --> ' + err);
-        })
-
-        socket.emit('chat message', { message: 'ffddf' });
     }
 
     postInfo() {
@@ -121,7 +112,9 @@ const mapStateToProps = state => ({
   const mapDispatchToProps = dispatch => ({
     postInfo: (info) => dispatch(UserPostsAction.postInfo(info)),
     getUserPosts: () => dispatch(UserPostsAction.getUserPosts()),
-    postComment: (id, commentInfo) => dispatch(UserPostsAction.updateUserPosts(id, commentInfo))
+    postComment: (id, commentInfo) => dispatch(UserPostsAction.updateUserPosts(id, commentInfo)),
+    insertPost:(res) => dispatch(UserPostsAction.insertPost(res)),
+    addComment:(res) => dispatch(UserPostsAction.addComment(res)),
   });
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserPostsComponent);

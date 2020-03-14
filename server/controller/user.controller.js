@@ -24,22 +24,26 @@ class UserController {
   }
 
   static createPost(req, res) {
+    const io = req.io;
     UserService.createPost(req.body, (err, result) => {
       if (err) {
         res.status(500).send(err);
         return;
       }
+      io.emit('user post', result);
       res.status(200).send(result);
     })
   }
 
   static updatePost(req, res) {
     const postId = req.params.id;
+    const io = req.io;
     UserService.updatePost(req.body, postId, (err, result) => {
       if (err) {
         res.status(500).send(err);
         return;
       }
+      io.emit('update post', result);
       res.status(200).send(result);
     })
   }

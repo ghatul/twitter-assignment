@@ -29,22 +29,20 @@ app.use(function(req, res, next) {
   next();
 });
 
-app.use((req,res,next) => {
-  req.io = io
-  next()
-})
 process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = "0";
 
 const server = require('http').createServer(app);
 const io = require('socket.io')(server);
 
+app.use((req,res,next) => {
+  req.io = io
+  next();
+});
+
 app.use('/api', indexRouter);
 
-
-
-io.on('connection', function(client) {
+io.on('connection', (client) => {
   console.log('----------Client connected...');
-
   client.on('join', function(data) {
       console.log(data);
   });
@@ -64,7 +62,7 @@ io.on('connect_error', (err) => {
   console.log('socket connected error --> ' + err);
 })
 
-io.emit('some event', { someProperty: 'some value', otherProperty: 'other value' }); // This will emit the event to all connected socket
+//io.emit('some event', { someProperty: 'some value', otherProperty: 'other value' }); // This will emit the event to all connected socket
 
 // Error handler
 mongoService.connect().then(result => {
