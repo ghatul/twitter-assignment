@@ -5,20 +5,28 @@ const mongoose = require('mongoose');
 class UserPostsRepository {
 
   createPosts(data, callback) {
+    const db = mongoService.getDbInstance();
     const userPostModel = new userPosts(data);
     userPostModel.save(function (err, result) {
       if (err) {
         callback(err, null);
         return;
       }
-      callback(null, result);
+      userPosts.findOne({_id: result._id}).populate('userInfo', '-password').
+        exec(function (err, res) {
+          if (err) {
+            callback(err, null);
+            return;
+          }
+          callback(null, res);
+        })
     })
   }
 
   updatePost(data, psotId, callback) {
     const db = mongoService.getDbInstance();
     const userCommnetsModel = new userCommnets(data);
-    userPosts.findByIdAndUpdate({_id: mongoose.Types.ObjectId(psotId)}, {$push: {comments: userCommnetsModel}}, {new: true} , function(err, result) {
+    userPosts.findByIdAndUpdate({_id: mongoose.Types.ObjectId(psotId)}, {$push: {comments: userCommnetsModel}}, {new: true}).populate('userInfo', '-password').exec((err, result) => {
       if (err) {
         callback(err, null);
         return;
