@@ -1,0 +1,33 @@
+{
+  "name": "@sgas-api/node-template",
+  "version": "1.0.0",
+  "description": "Qick start on module",
+  "main": "index.js",
+  "publishConfig": {
+    "registry": ""
+  },
+  "scripts": {
+    "start": "nodemon server.js",
+    "debug": "nodemon --inspect server.js 80",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "license": "ISC",
+  "homepage": "",
+  "dependencies": {
+    "bluebird": "^3.5.1",
+    "compression": "^1.7.2",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.6.9",
+    "express": "^4.17.1",
+    "express-ws": "^4.0.0",
+    "helmet": "^3.12.1",
+    "lodash": "^4.17.10",
+    "mongoose": "^5.5.14",
+    "pug": "2.0.0-beta11",
+    "socket.io": "^2.3.0",
+    "websocket": "^1.0.31"
+  },
+  "devDependencies": {
+    "nodemon": "^1.17.5"
+  }
+}
