@@ -53,7 +53,8 @@ const userPosts = new Schema({
     updated_on: {
         type: Date,
         default: Date.now
-    }
+    },
+    userInfo: { type: Schema.Types.ObjectId, ref: 'MyUser' }
 });
 
 const userPostsModel = mongoose.model("userPosts", userPosts);

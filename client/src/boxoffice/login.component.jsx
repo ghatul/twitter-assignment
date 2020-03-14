@@ -1,7 +1,6 @@
 
 import React from 'react';
 import apiService from './movie.service';
-import io from 'socket.io-client';
 const _ = require('lodash');
 
 
@@ -35,28 +34,6 @@ class LoginComponent extends React.Component {
     }
 
     componentDidMount() {
-        var socket = io.connect('ws://127.0.0.1:4001');
-        socket.on('some event', (data) => {
-           // alert('data');
-        })
-
-        socket.on('connect', function (socket) {
-           // alert('Connected!');
-        });
-
-        socket.on('chat message', function (socket) {
-            alert('chat message!');
-        });
-
-        socket.on('messages', function (socket) {
-            alert('socket');
-        });
-
-        socket.on('connect_error', (err) => {
-            console.log('socket connected error --> ' + err);
-        })
-
-        socket.emit('chat message', { message: 'ffddf' });
     }
 
     onChange(event) {

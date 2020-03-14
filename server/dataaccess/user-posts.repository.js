@@ -28,9 +28,9 @@ class UserPostsRepository {
 
   getUserPosts(callback) {
     const db = mongoService.getDbInstance();
-    db.collection('userposts').find({}).toArray((err, result) => {
+    userPosts.find({}).populate('userInfo', '-password').exec((err, result) => {
       if (err) {
-        callback(err, null);
+        callback(err, null);  
         return;
       }
       callback(null, result);

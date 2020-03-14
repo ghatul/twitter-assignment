@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import UserPostsAction from './../actions/user-post';
+import io from 'socket.io-client';
 const _ = require('lodash');
 
 
@@ -16,6 +17,29 @@ class UserPostsComponent extends React.Component {
 
     componentDidMount() {
         this.props.getUserPosts();
+
+        var socket = io.connect('ws://127.0.0.1:4001');
+        socket.on('some event', (data) => {
+           // alert('data');
+        })
+
+        socket.on('connect', function (socket) {
+           // alert('Connected!');
+        });
+
+        socket.on('chat message', function (socket) {
+            alert('chat message!');
+        });
+
+        socket.on('messages', function (socket) {
+            alert('socket');
+        });
+
+        socket.on('connect_error', (err) => {
+            console.log('socket connected error --> ' + err);
+        })
+
+        socket.emit('chat message', { message: 'ffddf' });
     }
 
     postInfo() {
@@ -29,14 +53,22 @@ class UserPostsComponent extends React.Component {
     }
    
     render() {
+        const { posts } = this.props;    
         return (
             <div>
-               <label>Write Your</label>
-               <input name='postInfo'
-               onChange={this.onChange} 
-               value={this.state.postInfo} 
-               ></input>
-               <button onClick={this.postInfo}>post</button>
+                <div>
+                    <label>Write Your</label>
+                    <input name='postInfo'
+                        onChange={this.onChange}
+                        value={this.state.postInfo}
+                    ></input>
+                    <button onClick={this.postInfo}>post</button>
+                </div>
+                <div>
+                 <ul>
+                  {_.map(posts, item =>  (<li>{item.postInfo}</li>))}
+                  </ul>
+                </div>
             </div>
         );
     }

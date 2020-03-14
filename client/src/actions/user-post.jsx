@@ -14,6 +14,7 @@ export default class UserPostsAction {
     static getUserPosts() {
         return (dispatch) => {
             apiService.getUserPosts().then(res => {
+                debugger
                 dispatch(UserPostsAction.setUserPosts(res))
             }).catch(err => {
     
@@ -24,7 +25,7 @@ export default class UserPostsAction {
     static postInfo(postInfo) {
         return (dispatch) => {
         const userId = UtilityService.getCookie('userId')
-        let obj = { postInfo: postInfo, comments: [], likes: [], userId: userId };
+        let obj = { postInfo: postInfo, comments: [], likes: [], userId: userId, userInfo: userId };
         apiService.createUserPosts(obj).then(res => {
             debugger
         }).catch(err => {
