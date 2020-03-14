@@ -1,0 +1,92 @@
+
+.movie {
+    width: 100%;
+    background-color: #cacebc;
+    height: 100px;
+    margin: 18px 0px 0px 0px;
+    list-style: none;
+}
+
+
+.searchBox {
+  margin: 39px 0 0px 275px;
+}
+
+.searchBox input {
+border-radius: 25px;
+}
+
+.searchInputBox {
+  width: 354px;
+  height: 29px;
+}
+
+.searchButton {
+  height: 31px;
+  margin: 0 0 0px 8px;
+  color: forestgreen;
+}
+
+.grid-container {
+  display: grid;
+  grid-column-gap: 6px;
+  grid-template-columns: auto auto auto auto;
+}
+
+.g-movie {
+  margin: 47px 0 0 0;
+}
+
+.g-poster {
+  height: 300px;
+  width: 260px;
+}
+
+.movie-details {
+  padding: 4px 4px 11px 0;
+  text-align: center;
+  font-size: 10px;
+  color: red;
+}
+
+.searchBar {
+    margin: 8px 0 0 0px;
+    height: 35px;
+}
+
+.m-poster {
+  width: 220px;
+  height: 300px;
+}
+
+.login {
+  width: 342px;
+  height: 186px;
+  border: 1px solid;
+  padding: 69px 0px 0px 55px;
+  margin: 70px 0px 0px 423px;
+}
+
+.dashboardContainer {
+  padding: 0 10px 0 10px;
+}
+
+.userName {
+  padding: 0 0 10px 0;
+}
+
+.login-submit {
+  margin: 51px 0 0 101px;
+}
+
+.user-name-input-box{
+  margin: 0 0 0 36px;
+}
+
+.user-pwd-input-box {
+  margin: 0 0 0 20px;
+}
+
+.no-data-avail {
+  margin: 173px 0px 0px 309px;
+}
