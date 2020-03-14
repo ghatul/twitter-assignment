@@ -8,6 +8,8 @@ router.post('/registration', userController.registration);
 
 router.post('/createPost', userController.createPost);
 
+router.post('/updatepost/:id', userController.updatePost);
+
 router.post('/userInfo', userController.userInfo);
 
 router.get('/userpost', userController.getUserPosts);

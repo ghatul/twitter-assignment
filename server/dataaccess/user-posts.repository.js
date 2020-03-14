@@ -1,11 +1,24 @@
 const mongoService = require('./mongo.service');
-const userPosts = require('./schema/user-posts');
+const { userPosts, userCommnets } = require('./schema/user-posts');
+const mongoose = require('mongoose');
 
 class UserPostsRepository {
 
   createPosts(data, callback) {
     const userPostModel = new userPosts(data);
     userPostModel.save(function (err, result) {
+      if (err) {
+        callback(err, null);
+        return;
+      }
+      callback(null, result);
+    })
+  }
+
+  updatePost(data, psotId, callback) {
+    const db = mongoService.getDbInstance();
+    const userCommnetsModel = new userCommnets(data);
+    db.collection('userposts').updateOne({_id: mongoose.Types.ObjectId(psotId)}, {$push: {comments: userCommnetsModel}} , function(err, result) {
       if (err) {
         callback(err, null);
         return;
@@ -37,16 +50,16 @@ class UserPostsRepository {
     });
   }
 
-  updatedPosts(data, callback) {
-    const userInfoModel = new userInfo(data);
-    userInfoModel.save(function(err, result) {
-      if(err) {
-        callback(err, null);
-        return;
-      }
-      callback(null, result);
-    })
-  }
+  // updatedPosts(data, callback) {
+  //   const userInfoModel = new userInfo(data);
+  //   userInfoModel.save(function(err, result) {
+  //     if(err) {
+  //       callback(err, null);
+  //       return;
+  //     }
+  //     callback(null, result);
+  //   })
+  // }
 
 }
 

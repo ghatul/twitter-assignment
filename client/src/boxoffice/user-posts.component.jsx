@@ -10,6 +10,7 @@ class UserPostsComponent extends React.Component {
         super(props);
         this.state = {
             postInfo: '',
+            commentInfo: '',
         }
         this.postInfo = this.postInfo.bind(this);
         this.onChange = this.onChange.bind(this);
@@ -51,7 +52,35 @@ class UserPostsComponent extends React.Component {
         obj[event.target.name] = event.target.value;
         this.setState({ ...obj });
     }
-   
+
+    postComment(postId) {
+        this.props.postComment(postId, this.state.commentInfo);
+    }
+
+    showComments(post) {
+        if (post.comments.length) {
+            return (
+                <ul>{_.map(post.comments, item => (
+                    <li>{item.commentInfo}</li>))}
+                    <li>
+                        <input name='commentInfo'
+                            value={this.state.commentInfo}
+                            onChange={this.onChange}
+                        ></input>
+                        <button onClick={() => this.postComment(post._id)}>post</button>
+                    </li>
+                </ul>
+            )
+        } else {
+            return <><li> <input name='commentInfo'
+                value={this.state.commentInfo}
+                onChange={this.onChange}
+            ></input>
+                <button onClick={() => this.postComment(post._id)}>post</button></li>
+            </>;
+        }
+    }
+
     render() {
         const { posts } = this.props;    
         return (
@@ -66,7 +95,16 @@ class UserPostsComponent extends React.Component {
                 </div>
                 <div>
                  <ul>
-                  {_.map(posts, item =>  (<li>{item.postInfo}</li>))}
+                  {_.map(posts, item =>  (<><li>
+                  <img src="./profile-icon.png    " alt="Smiley face" height="42" width="42"></img>
+                  <span>{item.userInfo.firstName} {item.userInfo.lastName} </span>
+                  <span>@{item.userInfo.userName}</span>
+                    <p>{item.postInfo}</p>
+                  </li>
+                  <li>
+                {this.showComments(item)}
+                  </li>
+                  </>))}
                   </ul>
                 </div>
             </div>
@@ -80,7 +118,8 @@ const mapStateToProps = state => ({
   
   const mapDispatchToProps = dispatch => ({
     postInfo: (info) => dispatch(UserPostsAction.postInfo(info)),
-    getUserPosts: () => dispatch(UserPostsAction.getUserPosts())
+    getUserPosts: () => dispatch(UserPostsAction.getUserPosts()),
+    postComment: (id, commentInfo) => dispatch(UserPostsAction.updateUserPosts(id, commentInfo))
   });
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserPostsComponent);

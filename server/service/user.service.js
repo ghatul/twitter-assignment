@@ -33,6 +33,16 @@ class UserService {
     })
   }
 
+  updatePost(data,postId, callback) {
+    userPostRepository.updatePost(data, postId, (err, result) => {
+      if(err) {
+        callback(err, null);
+        return;
+      }
+      callback(null, result);
+    })
+  }
+
   getUserPosts(callback) {
     userPostRepository.getUserPosts((err, result) => {
       if(err) {

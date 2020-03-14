@@ -11,20 +11,7 @@ const userComments = new Schema({
         required: true
     },
     likes: [],
-    comments: [
-        {
-            userId: {
-                type: String,
-                required: true
-            },
-            commentInfo: {
-                type: String,
-                required: true
-            },
-            comments: [],
-            likes: [],
-        }
-    ],
+    comments: [],
     created_on: {
         type: Date,
         default: Date.now
@@ -32,7 +19,8 @@ const userComments = new Schema({
     updated_on: {
         type: Date,
         default: Date.now
-    }
+    },
+    userInfo: { type: Schema.Types.ObjectId, ref: 'MyUser' }
 })
 
 const userPosts = new Schema({
@@ -58,5 +46,9 @@ const userPosts = new Schema({
 });
 
 const userPostsModel = mongoose.model("userPosts", userPosts);
+const userCommentsModel = mongoose.model("userComments", userComments);
 
-module.exports = userPostsModel;
+module.exports = {
+    userPosts:userPostsModel,
+    userCommnets: userCommentsModel
+}

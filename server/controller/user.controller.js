@@ -33,6 +33,17 @@ class UserController {
     })
   }
 
+  static updatePost(req, res) {
+    const postId = req.params.id;
+    UserService.updatePost(req.body, postId, (err, result) => {
+      if (err) {
+        res.status(500).send(err);
+        return;
+      }
+      res.status(200).send(result);
+    })
+  }
+
   static getUserPosts(req, res) {
     UserService.getUserPosts((err, result) => {
       if (err) {
@@ -51,7 +62,6 @@ class UserController {
       }
       res.status(200).send(result);
     })
-
   }
 
 }

@@ -21,9 +21,10 @@ export default class MovieService {
         }).catch(err => err);
     }
 
-    static updateUserPosts(data) {
-        let url = 'http://localhost:4001/userpost';
-        return requestService.update(url, data).then(res => {
+    static updateUserPosts(data, postId) {
+        debugger
+        let url = `http://localhost:4001/api/updatepost/${postId}`;
+        return requestService.save(url, data).then(res => {
             return res.data;
         }).catch(err => err);
     }
