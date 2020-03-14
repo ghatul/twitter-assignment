@@ -14,6 +14,7 @@ class UserPostsComponent extends React.Component {
         }
         this.postInfo = this.postInfo.bind(this);
         this.onChange = this.onChange.bind(this);
+        this.postComment = this.postComment.bind(this);
     }
 
     componentDidMount() {
@@ -54,6 +55,7 @@ class UserPostsComponent extends React.Component {
     }
 
     postComment(postId) {
+        debugger
         this.props.postComment(postId, this.state.commentInfo);
     }
 
@@ -82,7 +84,7 @@ class UserPostsComponent extends React.Component {
     }
 
     render() {
-        const { posts } = this.props;    
+        const { posts } = this.props;  
         return (
             <div>
                 <div>

@@ -18,7 +18,7 @@ class UserPostsRepository {
   updatePost(data, psotId, callback) {
     const db = mongoService.getDbInstance();
     const userCommnetsModel = new userCommnets(data);
-    db.collection('userposts').updateOne({_id: mongoose.Types.ObjectId(psotId)}, {$push: {comments: userCommnetsModel}} , function(err, result) {
+    userPosts.findByIdAndUpdate({_id: mongoose.Types.ObjectId(psotId)}, {$push: {comments: userCommnetsModel}}, {new: true} , function(err, result) {
       if (err) {
         callback(err, null);
         return;
