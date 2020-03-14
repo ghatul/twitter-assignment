@@ -54,7 +54,12 @@ class UserPostsComponent extends React.Component {
         if (post.comments.length) {
             return (
                 <ul>{_.map(post.comments, item => (
-                    <li>{item.commentInfo}</li>))}
+                    <li>
+                    <img src="./profile-icon.png    " alt="Smiley face" height="15" width="15"></img>
+                    <span>@{item.userInfo.userName} </span>
+                    <p>{item.commentInfo}</p>
+                    </li>
+                    ))}
                     <li>
                         <input name='commentInfo'
                             value={this.state.commentInfo}

@@ -15,7 +15,7 @@ const userReducer = (state = initialState, action) => {
       return tempState;
     case INSERT_USER_POSTS:
       const arr = [...tempState.posts]
-      arr.push(action.payload);
+      arr.unshift(action.payload);
       tempState.posts = arr;
       return tempState;
     default:
