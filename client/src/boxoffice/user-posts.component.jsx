@@ -42,6 +42,7 @@ class UserPostsComponent extends React.Component {
 
     postInfo() {
         this.props.postInfo(this.state.postInfo);
+        this.setState({postInfo: ''});
     }
 
     onChange(event) {
@@ -52,6 +53,7 @@ class UserPostsComponent extends React.Component {
 
     postComment(postId) {
         this.props.postComment(postId, this.state.commentInfo);
+        this.setState({commentInfo: ''});
     }
 
     deletePost(postId) {

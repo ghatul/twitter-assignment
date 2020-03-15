@@ -1,10 +1,10 @@
 import React from 'react';
 import apiService from './movie.service';
-var axios = require("axios")
+//var axios = require("axios")
 const _ = require('lodash');
 
-var CancelToken = axios.CancelToken;
-var call1 = CancelToken.source();
+// var CancelToken = axios.CancelToken;
+// var call1 = CancelToken.source();
 
 
 
@@ -12,12 +12,13 @@ class RegistrationComponent extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            fisrtName: '',
+            firstName: '',
             lastName: '',
             userName: '',
             email: '',
             mobileNumber: '',
-            password: ''
+            password: '',
+            allFieldsAreRequired: false,
         }
         this.onSubmit = this.onSubmit.bind(this);
         this.onChange = this.onChange.bind(this);
@@ -25,9 +26,18 @@ class RegistrationComponent extends React.Component {
 
     onSubmit(e) {
         e.preventDefault();
-        apiService.userRegistration(this.state).then(res => {
+        const { firstName, lastName, userName, email, mobileNumber,password } = this.state;
+        if(!firstName || !lastName || !userName || !email || !mobileNumber || !password) {
+            this.setState({allFieldsAreRequired: true});
+            return;
+        }
+
+        this.setState({allFieldsAreRequired: false});
+        const obj = { firstName, lastName, userName, email, mobileNumber,password };
+        apiService.userRegistration(obj).then(res => {
+            alert('Registration Succes');
             this.props.history.push({
-                pathname: `/dashboard`,
+                pathname: `/`,
             });
         }).catch(err => {
             //console.log(err);
@@ -117,6 +127,7 @@ class RegistrationComponent extends React.Component {
                         <input type='submit' value='submit'></input>
                     </div>
                 </form>
+                {this.state.allFieldsAreRequired && <p>All fields are required</p>}
             </div>
         );
     }
