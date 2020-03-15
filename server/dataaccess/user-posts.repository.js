@@ -75,17 +75,6 @@ class UserPostsRepository {
     })
   }
 
-  // updatedPosts(data, callback) {
-  //   const userInfoModel = new userInfo(data);
-  //   userInfoModel.save(function(err, result) {
-  //     if(err) {
-  //       callback(err, null);
-  //       return;
-  //     }
-  //     callback(null, result);
-  //   })
-  // }
-
 }
 
 module.exports = new UserPostsRepository();
