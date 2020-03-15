@@ -1,11 +1,6 @@
 import React from 'react';
 import apiService from './movie.service';
-//var axios = require("axios")
 const _ = require('lodash');
-
-// var CancelToken = axios.CancelToken;
-// var call1 = CancelToken.source();
-
 
 
 class RegistrationComponent extends React.Component {
