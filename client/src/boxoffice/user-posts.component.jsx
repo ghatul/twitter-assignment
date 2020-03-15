@@ -15,6 +15,7 @@ class UserPostsComponent extends React.Component {
         this.postInfo = this.postInfo.bind(this);
         this.onChange = this.onChange.bind(this);
         this.postComment = this.postComment.bind(this);
+        this.deletePost = this.deletePost.bind(this);
     }
 
     componentDidMount() {
@@ -33,6 +34,10 @@ class UserPostsComponent extends React.Component {
         socket.on('update post', (res) => {
             this.props.addComment(res)
         });
+
+        socket.on('delete post', (res) => {
+            this.props.deletePost(res.postId)
+        });
     }
 
     postInfo() {
@@ -46,8 +51,12 @@ class UserPostsComponent extends React.Component {
     }
 
     postComment(postId) {
-        debugger
         this.props.postComment(postId, this.state.commentInfo);
+    }
+
+    deletePost(postId) {
+        debugger
+        this.props.deleteUserPosts(postId);
     }
 
     showComments(post) {
@@ -98,6 +107,7 @@ class UserPostsComponent extends React.Component {
                   <span>{item.userInfo.firstName} {item.userInfo.lastName} </span>
                   <span>@{item.userInfo.userName}</span>
                     <p>{item.postInfo}</p>
+                    <button onClick={() => this.deletePost(item._id)}>delete</button>
                   </li>
                   <li>
                 {this.showComments(item)}
@@ -120,6 +130,8 @@ const mapStateToProps = state => ({
     postComment: (id, commentInfo) => dispatch(UserPostsAction.updateUserPosts(id, commentInfo)),
     insertPost:(res) => dispatch(UserPostsAction.insertPost(res)),
     addComment:(res) => dispatch(UserPostsAction.addComment(res)),
+    deleteUserPosts:(postId) => dispatch(UserPostsAction.deleteUserPosts(postId)),
+    deletePost:(res) => dispatch(UserPostsAction.deletePost(res)),
   });
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserPostsComponent);

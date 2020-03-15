@@ -14,6 +14,10 @@ router.post('/userInfo', userController.userInfo);
 
 router.get('/userpost', userController.getUserPosts);
 
+router.get('/deletepost/:id', userController.deletePost);
+
+//router.delete('/deletepost/:id', userController.deletePost);
+
     
 
 module.exports = router;

@@ -36,6 +36,13 @@ export default class MovieService {
         }).catch(err => err);
     }
 
+    static deleteUserPosts(postId) {
+        let url = `http://localhost:4001/api/deletepost/${postId}`;
+        return requestService.fetch(url).then(res => {
+            return res.data;
+        }).catch(err => err);
+    }
+
 
     static searchMovies(title) {
         let url = `https://www.omdbapi.com?i=tt3896198&apikey=2933c48b&type=movie&r=json&s=${title}`;

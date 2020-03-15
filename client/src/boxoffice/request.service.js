@@ -24,4 +24,8 @@ export default class RequestService {
         return request(url, 'PUT', data);
     }
 
+    static delete(url, data) {
+        return request('delete', url, data);
+      }
+
 }

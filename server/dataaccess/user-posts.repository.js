@@ -51,7 +51,6 @@ class UserPostsRepository {
   }
 
   getUserPosts(callback) {
-    const db = mongoService.getDbInstance();
     userPosts.find({}).populate('userInfo', '-password')
     .populate({ path: 'comments.userInfo', select: '-password'}).
     sort({ 'created_on': -1 }).exec((err, result) => {
@@ -61,6 +60,19 @@ class UserPostsRepository {
       }
       callback(null, result);
     });
+  }
+
+  deletePost(postId, callback) {
+    const db = mongoService.getDbInstance();
+    db.collection('userposts').remove({ _id: mongoose.Types.ObjectId(postId) }, {
+      justOne: true
+    }, (err, result) => {
+      if (err) {
+        callback(err, null);
+        return;
+      }
+      callback(null, result);
+    })
   }
 
   // updatedPosts(data, callback) {

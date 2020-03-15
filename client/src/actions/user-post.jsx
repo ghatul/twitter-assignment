@@ -22,13 +22,22 @@ export default class UserPostsAction {
         });
     }
 
-    static insertCommentToPost(postId, resPost) {
-        const posts = store.getState().userReducer.posts || [];
-        const index = _.findIndex(posts, {_id: postId});
-        posts[index] = resPost;
-        debugger
-        UserPostsAction.insertPost(posts);
+    static deletePost(postId) {
+        const userPosts = store.getState().userReducer.posts || [];
+        const posts = _.cloneDeep(userPosts);
+        const index = _.findIndex(posts, { _id: postId });
+        posts.splice(index, 1);
+        return (dispatch) => {
+            dispatch(UserPostsAction.setUserPosts(posts));
+        }
     }
+
+    // static insertCommentToPost(postId, resPost) {
+    //     const posts = store.getState().userReducer.posts || [];
+    //     const index = _.findIndex(posts, {_id: postId});
+    //     posts[index] = resPost;
+    //     UserPostsAction.insertPost(posts);
+    // }
 
     static getUserPosts() {
         return (dispatch) => {
@@ -70,6 +79,14 @@ export default class UserPostsAction {
         }).catch(err => {
         })
       }
+    }
+
+    static deleteUserPosts(postId) {
+        return (dispatch) => {
+            apiService.deleteUserPosts(postId).then(res => {
+            }).catch(err => {
+            })
+        }
     }
 
 }

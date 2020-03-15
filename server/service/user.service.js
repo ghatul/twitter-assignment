@@ -63,6 +63,16 @@ class UserService {
     })
   }
 
+  deletePost(postId, callback) {
+    userPostRepository.deletePost(postId, (err, result) => {
+      if(err) {
+        callback(err, null);
+        return;
+      }
+      callback(null, result);
+    })
+  }
+
 }
 
 module.exports = new UserService();

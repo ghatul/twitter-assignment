@@ -68,6 +68,19 @@ class UserController {
     })
   }
 
+  static deletePost(req, res) {
+    const postId = req.params.id;
+    const io = req.io;
+    UserService.deletePost(postId, (err, result) => {
+      if (err) {
+        res.status(500).send(err);
+        return;
+      }
+      io.emit('delete post', {postId: postId});
+      res.status(200).send(result);
+    })
+  }
+
 }
 
 module.exports = UserController;
