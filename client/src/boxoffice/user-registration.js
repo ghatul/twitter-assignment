@@ -1,5 +1,5 @@
 import React from 'react';
-import apiService from './movie.service';
+import apiService from './user-posts.service';
 const _ = require('lodash');
 
 

@@ -1,6 +1,6 @@
 import requestService from './request.service';
 
-export default class MovieService {
+export default class UserPostService {
     static login(data) {
         let url = `http://localhost:4001/api/login`;
         return requestService.save(url, data);
