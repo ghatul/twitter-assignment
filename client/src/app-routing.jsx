@@ -1,8 +1,8 @@
 import React from 'react';
 import { Route, BrowserRouter as Router } from 'react-router-dom';
-import LoginComponent from './boxoffice/login.component';
-import RegistrationComponent from './boxoffice/user-registration';
-import UserPostsComponent from './boxoffice/user-posts.component'
+import LoginComponent from './twitter/login.component';
+import RegistrationComponent from './twitter/user-registration';
+import UserPostsComponent from './twitter/user-posts.component'
 import { Provider } from 'react-redux';
 import store from './store/store-config';
 

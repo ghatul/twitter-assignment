@@ -1,5 +1,5 @@
 import UtilityService from './../common/utility.service';
-import apiService from './../boxoffice/user-posts.service';
+import apiService from './../twitter/user-posts.service';
 import store from '../store/store-config';
 const _ = require('lodash');
 const SET_USER_POSTS = 'USER_POSTS';
