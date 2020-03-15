@@ -6,7 +6,6 @@ const helmet = require('helmet');
 const compression = require('compression');
 const indexRouter = require('./routes');
 const mongoService = require('./dataaccess/mongo.service');
-//const WebSocket = require('ws');
 /* Helmet can help protect app from some well-known web
 vulnerabilities by setting HTTP headers appropriately.*/
 app.use(helmet());

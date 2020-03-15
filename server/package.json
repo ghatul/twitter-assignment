@@ -24,8 +24,7 @@
     "lodash": "^4.17.10",
     "mongoose": "^5.5.14",
     "pug": "2.0.0-beta11",
-    "socket.io": "^2.3.0",
-    "websocket": "^1.0.31"
+    "socket.io": "^2.3.0"
   },
   "devDependencies": {
     "nodemon": "^1.17.5"
