@@ -1,5 +1,9 @@
 #  api service
 
+Pre requirments:
+1. node 
+2. mongodb (LTS)
+
 To run module.
 
 1.  `npm install`
@@ -8,7 +12,3 @@ To run module.
 To run in debug mode.
 
 1.  `npm run debug`
-
-To run test cases.
-
-1.  `npm run test`
