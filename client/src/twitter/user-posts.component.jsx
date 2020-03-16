@@ -69,10 +69,11 @@ class UserPostsComponent extends React.Component {
                         <div className="userImg">
                             <img src="./profile-icon.png" alt="Smiley face" height="15" width="15"></img>
                         </div>
-                        <div className="userInfo">                        
-                            <div className="userEmail">@{item.userInfo.userName} </div>
+                        <div className="userInfo">
+                            <div>@{item.userInfo.userName} <span className="userEmail">{item.created_on}</span> </div> 
+                            <div className="userEmail"> Replying to @{post.userInfo.userName} </div>
                             <div className="userPostInfo">
-                                <p>{item.commentInfo}</p>
+                                <p>{item.commentInfo}</p> 
                             </div>
                         </div>
                     </li>
@@ -126,6 +127,7 @@ class UserPostsComponent extends React.Component {
                                     <div className="userEmail">@{item.userInfo.userName}</div>
                                     <div className="userPostInfo">
                                         <p>{item.postInfo}</p>
+                                        <p className="userEmail">{item.created_on}</p>
                                     </div>
                                     <button onClick={() => this.deletePost(item._id)} className="btn btnDanger">Delete</button>
                                 </div>
