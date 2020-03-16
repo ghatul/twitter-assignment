@@ -65,57 +65,77 @@ class UserPostsComponent extends React.Component {
         if (post.comments.length) {
             return (
                 <ul>{_.map(post.comments, item => (
-                    <li>
-                    <img src="./profile-icon.png    " alt="Smiley face" height="15" width="15"></img>
-                    <span>@{item.userInfo.userName} </span>
-                    <p>{item.commentInfo}</p>
+                    <li className="userInfoList postComment clearfix">
+                        <div className="userImg">
+                            <img src="./profile-icon.png" alt="Smiley face" height="15" width="15"></img>
+                        </div>
+                        <div className="userInfo">                        
+                            <div className="userEmail">@{item.userInfo.userName} </div>
+                            <div className="userPostInfo">
+                                <p>{item.commentInfo}</p>
+                            </div>
+                        </div>
                     </li>
                     ))}
-                    <li>
+                    <li className="userInfoList postComment clearfix">
                         <input name='commentInfo'
+                            className="formControl"
                             value={this.state.commentInfo}
                             onChange={this.onChange}
                         ></input>
-                        <button onClick={() => this.postComment(post._id)}>post</button>
+                        <button onClick={() => this.postComment(post._id)} className="btn btnSuccess">Replay</button>
                     </li>
                 </ul>
             )
         } else {
-            return <><li> <input name='commentInfo'
+            return <ul><li className="userInfoList postComment clearfix"> 
+            <input className="formControl" name='commentInfo'
                 value={this.state.commentInfo}
                 onChange={this.onChange}
             ></input>
-                <button onClick={() => this.postComment(post._id)}>post</button></li>
-            </>;
+                <button className="btn btnSuccess" onClick={() => this.postComment(post._id)}>Replay</button></li>
+            </ul>;
         }
     }
 
     render() {
         const { posts } = this.props;  
         return (
-            <div>
-                <div>
-                    <label>Write Your</label>
-                    <input name='postInfo'
-                        onChange={this.onChange}
-                        value={this.state.postInfo}
-                    ></input>
-                    <button onClick={this.postInfo}>post</button>
-                </div>
-                <div>
-                 <ul>
-                  {_.map(posts, item =>  (<><li>
-                  <img src="./profile-icon.png    " alt="Smiley face" height="42" width="42"></img>
-                  <span>{item.userInfo.firstName} {item.userInfo.lastName} </span>
-                  <span>@{item.userInfo.userName}</span>
-                    <p>{item.postInfo}</p>
-                    <button onClick={() => this.deletePost(item._id)}>delete</button>
-                  </li>
-                  <li>
-                {this.showComments(item)}
-                  </li>
-                  </>))}
-                  </ul>
+            <div className="container">
+                <div className="wrapper">
+                    <div className="writePostWrapper">
+                        <label>Write Your</label>
+                        <input name='postInfo'
+                            className="formControl"
+                            onChange={this.onChange}
+                            value={this.state.postInfo}
+                        ></input>
+                        <button onClick={this.postInfo} className="btn btnSuccess">Post</button>
+                    </div>
+                    <div className="userPostWrapper">
+                        <ul>
+                            {_.map(posts, item =>  (<>
+                            <li className="userInfoList clearfix">
+                                <div className="userImg">
+                                    <img src="./profile-icon.png" alt="Smiley face" height="42" width="42"></img>
+                                </div>
+                                <div className="userInfo">
+                                    <div className="userName">
+                                        {item.userInfo.firstName} {item.userInfo.lastName} 
+                                    </div>
+                                    <div className="userEmail">@{item.userInfo.userName}</div>
+                                    <div className="userPostInfo">
+                                        <p>{item.postInfo}</p>
+                                    </div>
+                                    <button onClick={() => this.deletePost(item._id)} className="btn btnDanger">Delete</button>
+                                </div>
+                            </li>
+                            <li>
+                                {this.showComments(item)}
+                            </li>
+                            </>))}
+                        </ul>
+                    </div>
                 </div>
             </div>
         );
