@@ -78,6 +78,12 @@ body {
   text-transform: capitalize;
   font-weight: 600;
   margin-bottom: 4px;
+  display: inline;
+}
+
+.userInfo img {
+  float: right;
+  margin-top: 10px;
 }
 
 .userPostInfo {

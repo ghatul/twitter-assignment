@@ -3,7 +3,11 @@ import io from 'socket.io-client';
 import { connect } from 'react-redux';
 import UserPostsAction from './../actions/user-post';
 const _ = require('lodash');
+const moment = require('moment');
 
+const getDate = (date) => {
+    return moment(date).format('MMMM Do YYYY, h:mm:ss a');
+}
 
 class UserPostsComponent extends React.Component {
     constructor(props) {
@@ -70,7 +74,7 @@ class UserPostsComponent extends React.Component {
                             <img src="./profile-icon.png" alt="Smiley face" height="15" width="15"></img>
                         </div>
                         <div className="userInfo">
-                            <div>@{item.userInfo.userName} <span className="userEmail">{item.created_on}</span> </div> 
+                            <div>@{item.userInfo.userName} <span className="userEmail">{getDate(item.created_on)}</span> </div> 
                             <div className="userEmail"> Replying to @{post.userInfo.userName} </div>
                             <div className="userPostInfo">
                                 <p>{item.commentInfo}</p> 
@@ -105,7 +109,7 @@ class UserPostsComponent extends React.Component {
             <div className="container">
                 <div className="wrapper">
                     <div className="writePostWrapper">
-                        <label>Write Your</label>
+                        <label>Write Your Post</label>
                         <input name='postInfo'
                             className="formControl"
                             onChange={this.onChange}
@@ -123,13 +127,12 @@ class UserPostsComponent extends React.Component {
                                 <div className="userInfo">
                                     <div className="userName">
                                         {item.userInfo.firstName} {item.userInfo.lastName} 
-                                    </div>
+                                    </div> <img src="./delete-16.png"  onClick={() => this.deletePost(item._id)}></img>
                                     <div className="userEmail">@{item.userInfo.userName}</div>
                                     <div className="userPostInfo">
                                         <p>{item.postInfo}</p>
-                                        <p className="userEmail">{item.created_on}</p>
+                                        <p className="userEmail">{getDate(item.created_on)}</p>
                                     </div>
-                                    <button onClick={() => this.deletePost(item._id)} className="btn btnDanger">Delete</button>
                                 </div>
                             </li>
                             <li>
