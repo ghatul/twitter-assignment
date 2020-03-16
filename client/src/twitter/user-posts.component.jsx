@@ -15,6 +15,7 @@ class UserPostsComponent extends React.Component {
         this.state = {
             postInfo: '',
             commentInfo: '',
+            postId: '',
         }
         this.postInfo = this.postInfo.bind(this);
         this.onChange = this.onChange.bind(this);
@@ -61,8 +62,11 @@ class UserPostsComponent extends React.Component {
     }
 
     deletePost(postId) {
-        debugger
         this.props.deleteUserPosts(postId);
+    }
+
+    setPostId(postId) {
+        this.setState({postId, commentInfo: ''});
     }
 
     showComments(post) {
@@ -85,8 +89,9 @@ class UserPostsComponent extends React.Component {
                     <li className="userInfoList postComment clearfix">
                         <input name='commentInfo'
                             className="formControl"
-                            value={this.state.commentInfo}
+                            value={this.state.postId === post._id ? this.state.commentInfo : ''}
                             onChange={this.onChange}
+                            onClick={() => this.setPostId(post._id)}
                         ></input>
                         <button onClick={() => this.postComment(post._id)} className="btn btnSuccess">Replay</button>
                     </li>
@@ -95,8 +100,9 @@ class UserPostsComponent extends React.Component {
         } else {
             return <ul><li className="userInfoList postComment clearfix"> 
             <input className="formControl" name='commentInfo'
-                value={this.state.commentInfo}
+                value={this.state.postId === post._id ? this.state.commentInfo : ''}
                 onChange={this.onChange}
+                onClick={() => this.setPostId(post._id)}
             ></input>
                 <button className="btn btnSuccess" onClick={() => this.postComment(post._id)}>Replay</button></li>
             </ul>;
