@@ -1,7 +1,7 @@
 import React from 'react';
 import apiService from './user-posts.service';
+import { TwitterIcon } from './twitterSvg';
 const _ = require('lodash');
-
 
 class RegistrationComponent extends React.Component {
     constructor(props) {
@@ -21,14 +21,14 @@ class RegistrationComponent extends React.Component {
 
     onSubmit(e) {
         e.preventDefault();
-        const { firstName, lastName, userName, email, mobileNumber,password } = this.state;
-        if(!firstName || !lastName || !userName || !email || !mobileNumber || !password) {
-            this.setState({allFieldsAreRequired: true});
+        const { firstName, lastName, userName, email, mobileNumber, password } = this.state;
+        if (!firstName || !lastName || !userName || !email || !mobileNumber || !password) {
+            this.setState({ allFieldsAreRequired: true });
             return;
         }
 
-        this.setState({allFieldsAreRequired: false});
-        const obj = { firstName, lastName, userName, email, mobileNumber,password };
+        this.setState({ allFieldsAreRequired: false });
+        const obj = { firstName, lastName, userName, email, mobileNumber, password };
         apiService.userRegistration(obj).then(res => {
             alert('Registration Succes');
             this.props.history.push({
@@ -45,85 +45,90 @@ class RegistrationComponent extends React.Component {
     onChange(event) {
         const obj = {};
         obj[event.target.name] = event.target.value;
-        this.setState({ ...obj });
+        this.setState({ ...obj, allFieldsAreRequired: false });
     }
 
     render() {
         const { firstName, lastName, userName, email, mobileNumber, password } = this.state;
         return (
-            <div className="login">
-                <form onSubmit={this.onSubmit}>
-                    <div class="userName">
-                        <lable>firstName:</lable>
-                    <input
-                                type='text'
-                                className="user-name-input-box"
-                                value={firstName}
-                                name='firstName'
-                                onChange={this.onChange}
-                            ></input>
-                        
+            <>
+                <div className="container loginPage">
+                    <div className="svgHolder">
+                        <TwitterIcon />
+                        <h2>Create your account</h2>
                     </div>
-                    <div class="userName">
-                        <lable>lastName:</lable>
-                    <input
-                                type='text'
-                                className="user-name-input-box"
-                                value={lastName}
-                                name='lastName'
-                                onChange={this.onChange}
-                            ></input>
-                        
+                    <div className="login">
+                        <form onSubmit={this.onSubmit}>
+                            <div class="userName">
+                                <input
+                                    type='text'
+                                    className="inputHolder"
+                                    value={firstName}
+                                    name='firstName'
+                                    placeholder="Firstname"
+                                    onChange={this.onChange}
+                                ></input>
+                            </div>
+                            <div class="userName">
+                                <input
+                                    type='text'
+                                    className="inputHolder"
+                                    value={lastName}
+                                    name='lastName'
+                                    placeholder="Lastname"
+                                    onChange={this.onChange}
+                                ></input>
+                            </div>
+                            <div class="userName">
+                                <input
+                                    type='text'
+                                    className="inputHolder"
+                                    value={userName}
+                                    name='userName'
+                                    placeholder="Username"
+                                    onChange={this.onChange}
+                                ></input>
+                            </div>
+                            <div class="userName">
+                                <input
+                                    type='email'
+                                    className="inputHolder"
+                                    value={email}
+                                    name='email'
+                                    placeholder="Email Id"
+                                    onChange={this.onChange}
+                                ></input>
+                            </div>
+                            <div class="userName">
+                                <input
+                                    type='number'
+                                    className="inputHolder"
+                                    value={mobileNumber}
+                                    name='mobileNumber'
+                                    placeholder="Mobile Number"
+                                    onChange={this.onChange}
+                                ></input>
+                            </div>
+                            <div class="userName">
+                                <input
+                                    type='text'
+                                    className="inputHolder"
+                                    value={password}
+                                    name='password'
+                                    placeholder="Password"
+                                    onChange={this.onChange}
+                                ></input>
+                            </div>
+                            <div className="buttonWrap">
+                                <span className="submit">
+                                    <input type='submit' value='submit'></input>
+                                </span>
+                            </div>
+                        </form>
                     </div>
-                    <div class="userName">
-                        <lable>lastName:</lable>
-                    <input
-                                type='text'
-                                className="user-name-input-box"
-                                value={userName}
-                                name='userName'
-                                onChange={this.onChange}
-                            ></input>
-                        
-                    </div>
-                    <div class="userName">
-                        <lable>email:</lable>
-                    <input
-                                type='text'
-                                className="user-name-input-box"
-                                value={email}
-                                name='email'
-                                onChange={this.onChange}
-                            ></input>
-                        
-                    </div>
-                    <div class="userName">
-                        <lable>mobileNumber:</lable>
-                    <input
-                                type='text'
-                                className="user-name-input-box"
-                                value={mobileNumber}
-                                name='mobileNumber'
-                                onChange={this.onChange}
-                            ></input>
-                        
-                    </div>
-                    <div>
-                        <label>Password:</label>
-                    <input
-                                type='text'
-                                className="user-pwd-input-box"
-                                value={password}
-                                name='password'
-                                onChange={this.onChange}>
-                            </input>
-                    </div>
-                    <div className="login-submit">
-                        <input type='submit' value='submit'></input>
-                    </div>
-                </form>
-                {this.state.allFieldsAreRequired && <p>All fields are required</p>}
-            </div>
+                    {this.state.allFieldsAreRequired && <p className="danger-text">All fields are required</p>}
+                </div>
+            </>
         );
     }
 }

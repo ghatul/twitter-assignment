@@ -93,7 +93,7 @@ class UserPostsComponent extends React.Component {
                             onChange={this.onChange}
                             onClick={() => this.setPostId(post._id)}
                         ></input>
-                        <button onClick={() => this.postComment(post._id)} className="btn btnSuccess">Replay</button>
+                        <button onClick={() => this.postComment(post._id)} className="btn btnSuccess">comment</button>
                     </li>
                 </ul>
             )
@@ -104,7 +104,7 @@ class UserPostsComponent extends React.Component {
                 onChange={this.onChange}
                 onClick={() => this.setPostId(post._id)}
             ></input>
-                <button className="btn btnSuccess" onClick={() => this.postComment(post._id)}>Replay</button></li>
+                <button className="btn btnSuccess" onClick={() => this.postComment(post._id)}>comment</button></li>
             </ul>;
         }
     }

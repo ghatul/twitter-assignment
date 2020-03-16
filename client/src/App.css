@@ -152,14 +152,6 @@ body {
   height: 300px;
 }
 
-.login {
-  width: 342px;
-  height: 186px;
-  border: 1px solid;
-  padding: 69px 0px 0px 55px;
-  margin: 70px 0px 0px 423px;
-}
-
 .dashboardContainer {
   padding: 0 10px 0 10px;
 }
@@ -183,3 +175,49 @@ body {
 .no-data-avail {
   margin: 173px 0px 0px 309px;
 }
+
+.danger-text {
+  color: red;
+}
+/**/
+.loginPage {
+  margin: 0 auto;
+}
+.svgHolder {
+  margin: 0 auto 30px;
+}
+.svgHolder svg {
+  width: 50px;
+  height: 50px;
+  fill: #1da1f2;
+}
+.loginPage {
+  text-align: center;
+  margin-top: 50px;
+}
+.inputHolder {
+  border-width: 0 0 2px 0;
+  width: 50%;
+  height: 50px;
+  border-color: #333;
+  font-size: 16px;
+}
+.inputHolder:focus {
+  outline: none;
+}
+.buttonWrap {
+  margin-top: 30px;
+}
+.buttonWrap input,
+.buttonWrap button {
+  min-width: 100px;
+  padding: 8px 0;
+  background-color: #1da1f2;
+  border: 0;
+  border-radius: 2px;
+  margin: 0 23px;
+  box-shadow: 2px 2px #888888;
+  color: #333;
+  font-size: 14px;
+}
+/**/
